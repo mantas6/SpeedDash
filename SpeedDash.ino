@@ -94,5 +94,9 @@ void loop() {
 
   display.display();
   
+  /* Resets values if there is not movement */
+  if(millis() - spdtime > 2000) spd = 0;
+  if(millis() - rpmtime > 2000) rpm = 0;
+  
   delay(100);
 }
