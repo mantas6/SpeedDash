@@ -99,29 +99,30 @@ void loop() {
   display.drawRect(6, 6, 116, display.height()-2*1, WHITE);
   
   /* Speed */
-  display.setCursor(15,15);
+  display.setCursor(10,10);
   display.setTextColor(WHITE);
   display.setTextSize(4);
   display.print(dtostrf((spd > 99 ? 99 : spd), 2, 0, temp));
   
   /* Speed Decimal Point */
-  display.setCursor(64,15);
+  display.setCursor(58,10);
   display.setTextColor(WHITE, BLACK);
   display.setTextSize(2);
   display.print(int((abs(spd) - floor(spd)) * 10));
   
   /* Cadence */
-  display.setCursor(64,35);
+  display.setCursor(70,10);
   display.setTextColor(WHITE, BLACK);
   display.setTextSize(1);
+  display.print("RPM:");
   display.print(dtostrf(rpm, 2, 0, temp));
 
   /* Odometer */
-  display.setCursor(10,45);
+  display.setCursor(10,40);
   display.setTextColor(WHITE, BLACK);
   display.setTextSize(1);
   display.print(dtostrf(odo, 2, 2, temp));
-  display.print("km");
+  display.print("k");
 
   display.display();
   
