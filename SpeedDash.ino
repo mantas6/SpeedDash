@@ -21,6 +21,10 @@ long rpmtime = 0;
 float spd = 0;
 long spdtime = 0;
 
+//Stats
+long stattime = 0;
+float odo = 0;
+
 void setup()   {                
   Serial.begin(9600);
   
@@ -45,7 +49,20 @@ void spdInt()
   spdtime = millis();
   
   spd = ((1 / (float(time) / 1000)) * 60) * WHEEL / 10 / 100 / 1000 * 60; 
-}  
+}
+
+void stat()
+{
+  if(stattime + 1000 < millis())
+  {
+    int time = millis() - stattime;
+
+    stattime = millis();
+
+    odo += spd / 60 / 60 / 1000 * time;
+  }
+}
+
 
 void loop() {
   char temp[10];
@@ -95,6 +112,12 @@ void loop() {
   display.setTextSize(1);
   display.print(dtostrf(rpm, 2, 0, temp));
 
+  /* Odometer */
+  display.setCursor(10,45);
+  display.setTextColor(WHITE, BLACK);
+  display.setTextSize(1);
+  display.print(dtostrf(odo, 2, 2, temp));
+
   display.display();
   
   /* Resets values if there is not movement */
@@ -102,4 +125,5 @@ void loop() {
   if(millis() - rpmtime > 2000) rpm = 0;
   
   delay(100);
+  stat();
 }
