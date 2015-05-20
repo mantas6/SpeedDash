@@ -51,9 +51,12 @@ void loop() {
   char temp[10];
   
   display.clearDisplay();
+
+  /* Converting RPM to graph value */
+  int rpmg = rpm * 2 - 80;
   
   /* Cadence Bar */
-  for(int a = 0; a < rpm; a++)
+  for(int a = 0; a < rpmg; a++)
   {
     if(a > 250 || a < 0) break;
     
