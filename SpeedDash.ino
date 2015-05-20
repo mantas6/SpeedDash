@@ -117,6 +117,7 @@ void loop() {
   display.setTextColor(WHITE, BLACK);
   display.setTextSize(1);
   display.print(dtostrf(odo, 2, 2, temp));
+  display.print("km");
 
   display.display();
   
