@@ -25,6 +25,9 @@ long spdtime = 0;
 long stattime = 0;
 float odo = 0;
 
+//Idle time
+int slp = 0;
+
 void setup()   {                
   Serial.begin(9600);
   
@@ -60,6 +63,17 @@ void stat()
     stattime = millis();
 
     odo += spd / 60 / 60 / 1000 * time;
+
+    /* If bicycle is not moving */
+    if(spd == 0 && rpm == 0)
+    {
+      /* Limits slp variable so it doesn't overflow */
+      if(slp <= 60) slp++;
+    }
+    else
+    {
+      slp = 0;
+    }
   }
 
   /* Resets values if there is not movement */
@@ -67,8 +81,26 @@ void stat()
   if(millis() - rpmtime > 2000) rpm = 0;
 }
 
+void loop()
+{
+  stat();
 
-void loop() {
+  if(slp < 60)
+  {
+    /* Only executed when bike is being ridden */
+    displayRide();
+  }
+  else
+  {
+    display.clearDisplay();
+    display.display();
+  }
+
+  delay(100);
+}
+
+void displayRide()
+{
   char temp[10];
   
   display.clearDisplay();
@@ -125,7 +157,4 @@ void loop() {
   display.print("k");
 
   display.display();
-  
-  delay(100);
-  stat();
 }
