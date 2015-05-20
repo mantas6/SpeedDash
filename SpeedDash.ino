@@ -61,6 +61,10 @@ void stat()
 
     odo += spd / 60 / 60 / 1000 * time;
   }
+
+  /* Resets values if there is not movement */
+  if(millis() - spdtime > 2000) spd = 0;
+  if(millis() - rpmtime > 2000) rpm = 0;
 }
 
 
@@ -120,10 +124,6 @@ void loop() {
   display.print("km");
 
   display.display();
-  
-  /* Resets values if there is not movement */
-  if(millis() - spdtime > 2000) spd = 0;
-  if(millis() - rpmtime > 2000) rpm = 0;
   
   delay(100);
   stat();
