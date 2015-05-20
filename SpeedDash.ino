@@ -55,7 +55,7 @@ void loop() {
   /* Cadence Bar */
   for(int a = 0; a < rpm; a++)
   {
-    if(a > 250) break;
+    if(a > 250 || a < 0) break;
     
     if(a < 65)
     {
