@@ -9,5 +9,7 @@ Also using two graphics libraries:
 
 Unit has two speed sensors one for cadence and other for speed.
 
+A3144 hall effect sensors are used and connected to the interrupt pins (2 and 3). (8K pull-ups are used for each)
+
 On the display you can see: speed, cadence (value and graph), and odometer.
 <img src="http://i.imgur.com/zrawZOI.jpg">
