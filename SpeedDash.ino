@@ -106,7 +106,7 @@ void displayRide()
   display.clearDisplay();
 
   /* Converting RPM to graph value */
-  int rpmg = rpm * 2 - 80;
+  int rpmg = rpm * 3 - 190;
   
   /* Cadence Bar */
   for(int a = 0; a < rpmg; a++)
